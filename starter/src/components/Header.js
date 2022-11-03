@@ -23,13 +23,19 @@ const Header = () => {
         {authCtx.token ? (
           <ul className="main-nav">
             <li>
-              <Link to="/">Home</Link>
+              <NavLink style={styleActiveLink} to="/">
+                Home
+              </NavLink>
             </li>
             <li>
-              <Link to="profile">Profile</Link>
+              <NavLink style={styleActiveLink} to="profile">
+                Profile
+              </NavLink>
             </li>
             <li>
-              <Link to="form">Add Post</Link>
+              <NavLink style={styleActiveLink} to="form">
+                Add Post
+              </NavLink>
             </li>
             <li>
               <button className="logout-btn" onClick={() => authCtx.logout()}>
@@ -40,10 +46,14 @@ const Header = () => {
         ) : (
           <ul className="main-nav">
             <li>
-              <Link to="/">Home</Link>
+              <NavLink style={styleActiveLink} to="/">
+                Home
+              </NavLink>
             </li>
             <li>
-              <Link to="/auth">Login or Sign Up</Link>
+              <NavLink style={styleActiveLink} to="/auth">
+                Login or Sign Up
+              </NavLink>
             </li>
           </ul>
         )}
