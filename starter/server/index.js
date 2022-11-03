@@ -4,13 +4,9 @@ const express = require("express");
 const cors = require("cors");
 
 const { sequelize } = require("./util/database");
+const { PORT } = process.env;
 const { User } = require("./models/user");
 const { Post } = require("./models/post");
-
-User.hasMany(Post);
-Post.belongsTo(User);
-
-const { PORT } = process.env;
 const {
   getAllPosts,
   getCurrentUserPosts,
@@ -26,6 +22,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+User.hasMany(Post);
+Post.belongsTo(User);
+
 //AUTH
 app.post("/register", register);
 app.post("/login", login);
@@ -39,8 +38,10 @@ app.post("/posts", isAuthenticated, addPost);
 app.put("/posts/:id", isAuthenticated, editPost);
 app.delete("/posts/:id", isAuthenticated, deletePost);
 
+// the force: true is for development -- it DROPS tables!!!
 sequelize
-  .sync()
+  .sync({ force: true })
+  // sequelize.sync()
   .then(() => {
     app.listen(PORT, () =>
       console.log(`db sync successful & server running on port ${PORT}`)
