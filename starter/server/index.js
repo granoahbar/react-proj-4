@@ -1,5 +1,6 @@
+// requiring and configuring everything from dotenv that we are going to need
 require("dotenv").config();
-
+// requiring express and cors
 const express = require("express");
 const cors = require("cors");
 
@@ -16,9 +17,9 @@ const {
 } = require("./controllers/posts");
 const { register, login } = require("./controllers/auth");
 const { isAuthenticated } = require("./middleware/isAuthenticated");
-
+// setting variable app to express() so we do not have to say that over and over again
 const app = express();
-
+// we want JSON data!
 app.use(express.json());
 app.use(cors());
 
@@ -33,6 +34,7 @@ app.post("/login", login);
 app.get("/posts", getAllPosts);
 
 // CRUD POSTS - auth required
+// letting the back end know what is going to need auth to do
 app.get("/userposts/:userId", getCurrentUserPosts);
 app.post("/posts", isAuthenticated, addPost);
 app.put("/posts/:id", isAuthenticated, editPost);

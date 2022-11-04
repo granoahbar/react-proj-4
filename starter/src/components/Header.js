@@ -4,15 +4,18 @@ import { useContext } from "react";
 import AuthContext from "../store/authContext";
 import logo from "../assets/dm-logo-white.svg";
 
+// creating a component called header
 const Header = () => {
   const authCtx = useContext(AuthContext);
 
+  // function for adding style to a nav link if it is active
   const styleActiveLink = ({ isActive }) => {
     return {
+      // if the link is active, then set the color to waht is outlined below
       color: isActive ? "#f57145" : "",
     };
   };
-
+  // returnin the JSX with everything that is making up the header and adding the active link style functionality to the links
   return (
     <header className="header flex-row">
       <div className="flex-row">

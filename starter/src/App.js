@@ -19,6 +19,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route
           path="/auth"
+          // basically saying you can only route to these pages if there is a authCtx token that exists
           element={!authCtx.token ? <Auth /> : <Navigate to="/" />}
         />
         <Route
